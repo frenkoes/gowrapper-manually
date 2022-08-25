@@ -1,5 +1,5 @@
 CFLAGS=-Wall -Werror -g -ansi -pedantic -std=c99
-CCFLAGS=-Wall -Werror -g
+CPPFLAGS=-Wall -Werror -g
 LDFLAGS=-g -Wall -lstdc++
 
 PROG=main
@@ -9,14 +9,16 @@ OBJS=number.o numberWrapper.o main.o
 all: $(PROG)
 default: all
 
-%.o: %.cpp
+%.o: %.cpp 						# Build C++ files
 	$(CC) $(CCFLAGS) -c $<
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+%.o: %.c						# Build C files
+	$(CC) $(CPPFLAGS) -c $<
 
-$(PROG): $(OBJS)
-	$(CC) $(OBJS) $(LDFLAGS) -o $@
+$(PROG): $(OBJS)				# Link and create on BIn
+	$(CC) $(OBJS) $(LDFLAGS) -o $
+# Clean unnecessary object files
+	rm -f $(OBJS) 
 
 clean:
 	rm -f $(OBJS)
